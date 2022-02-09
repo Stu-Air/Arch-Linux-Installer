@@ -1,0 +1,118 @@
+
+loadkeys uk
+
+
+iwctl station [WIFI DEVICE] connect [SSID]
+
+Ping -c 5 www.google.com
+
+timedatectl set-ntp true
+
+fdisk [DISK TO INSTALL]
+Type g   (new guid)
+Type n
+Enter
+Enter
+Type +512M (size of partition 1)
+Type t
+Type 1 (efi partition 1)
+Type n
+Enter
+Enter
+Type +512M (size of partition 2)
+Type t
+Enter (accept default partition)
+Type 19 (swap partition 2)
+Type n
+Enter
+Enter
+Enter ( rest of disk partiton 3)
+Type w (write to disk)
+
+mkfs.fat -F32 [DISK PARTITION 1]
+mkswap [DISK PARTITION 2]
+mkfs.ext4 [DISK PARTITION 3]
+
+mount [DISK PARTITION 3] /mnt
+
+nano /etc/pacman.d/mirrorlist
+
+pacstrap /mnt base linux linux-firmware linux-headers
+
+
+genfstab -U /mnt >> /mnt/etc/fstab
+
+cat /mnt/etc/fstab
+
+arch-chroot /mnt
+
+pacman -S nano base-devel networkmanager wpa_supplicant wireless_tools netctl dialog
+
+systemctl enable NetworkManager
+
+
+ln -sf /usr/share/zoneinfo/Europe/Belfast /etc/localtime
+hwclock --systohc
+
+nano /etc/locale.gen ( uncomment "en_GB.UTF-8")
+
+locale-gen
+
+nano /etc/locale.conf ( type  "LANG=en_GB.UTF-8" )
+
+nano /etc/vconsole.conf ( type  "KEYMAP=uk" )
+
+nano /etc/hostname  ( type [HOST NAME] )
+nano /etc/hosts
+type   
+127.0.0.1 	localhost 
+::1		localhost 
+127.0.1.1. 	[HOST NAME].localdomain	[HOST NAME]
+
+mkinitcpio -P linux
+
+passwd (PASSWORD FOR ROOT)
+
+ useradd -m -g users -G wheel [USERNAME]
+ passwd [USERNAME]
+
+which sudo
+pacman -S sudo ( if not installed )
+
+EDITOR=nano visudo (uncomment the wheel-all=all all ) near bottom
+Ctrl o to save
+Ctrl x to exit
+
+
+
+pacman -S grub efibootmgr dosfstools os-prober mtools
+
+
+mkdir /boot/efi
+mount [DISK PARTITION 1] /boot/efi
+grub-install --target=x86_64-efi efi-directory=/boot/efi
+
+(--bootloader-id=grub_uefi --recheck) try not needed
+
+mkdir /boot/grub/locale
+cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+
+grub-mkconfig -o /boot/grub/grub.cfg
+
+
+pacman -S [AMD/INTEL]-ucode xorg-server mesa dhcpcd
+
+
+[DOWNLOAD DESKTOP OF CHOICE]
+[DOWNLOAD LOGIN MANAGER]
+[SYSTEMCTL ENABLE LOGIN MAANAGER]
+
+pacman -Syu
+
+exit
+umount -R /mnt
+poweroff
+
+
+
+All WORKS!! (May have to disable netctl on boot)
