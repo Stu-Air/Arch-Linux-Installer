@@ -119,7 +119,19 @@ sudo mkswap /swapfile
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 sudo swapon -s
 
+# --------------------------------------- EXTRAS BELOW ----------------------#
+
+echo "enable multilib packages"
+echo "[multilib]
+Include = /etc/pacman.d/mirrorlist" | sudo tee -a /etc/pacman.conf
+
+sudo sh -c 'echo "vm.swappiness=10" >> /etc/sysctl.d/99-swappiness.conf'
+
 pacman -Syu --noconfirm
+
+echo "Mounting second drive"
+echo "LABEL=Media                                  /mnt/Media   auto   nosuid,nodev,nofail,x-gvfs-show   0 0" | sudo tee -a /etc/fstab
+
 EOF
 
 
