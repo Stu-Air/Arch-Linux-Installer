@@ -24,5 +24,5 @@ you will need to mount the drive/usb you have the script on and simply run sh ./
 
 Please feel free to customize & tweak or even add your own custom tweaks, however these features require some basic knowledge of command line usage and shell scripting.
 
-I AM NOT RESPONSEABLE FOR ANY DAMAGE TO YOUR MACHINE. please read carefully and use you head this will wipe and repartition you drive.
+I AM NOT RESPONSEABLE FOR ANY DAMAGE TO YOUR MACHINE. please read carefully and use your head this will wipe and repartition your drive.
  
