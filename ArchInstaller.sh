@@ -5,7 +5,7 @@ user_password=""
 hostname=""
 username=""
 continent_city=""
-chipset=""     # amd or intel
+chipset=""     # amd-ucode or intel-ucode
 
 loadkeys uk
 
@@ -60,8 +60,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 echo "Configuring new system"
 arch-chroot /mnt /bin/bash <<EOF
  
-pacman -S --noconfirm sudo acpi acpid nano wget networkmanager wpa_supplicant wireless_tools netctl dialog grub efibootmgr dosfstools os-prober mtools xorg xorg-apps xf86-video-amdgpu mesa dhcpcd amd-ucode pulseaudio-bluetooth bluez bluez-utils fuse2 unzip gvfs xdg-user-dirs
-xdg-user-dirs-update
+pacman -S --noconfirm sudo acpi acpid nano wget networkmanager wpa_supplicant wireless_tools netctl dialog grub efibootmgr dosfstools os-prober mtools xorg xorg-apps xf86-video-amdgpu mesa dhcpcd pulseaudio-bluetooth bluez bluez-utils fuse2 unzip gvfs xdg-user-dirs
+xdg-user-dirs-update $chipset
 LC_ALL=C xdg-user-dirs-update --force
 
 
