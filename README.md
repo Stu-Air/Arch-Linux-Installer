@@ -1,11 +1,10 @@
+# THIS IS AN OLD PROJECT FOR NEWER VERSION VISIT https://github.com/Stu-Air/Arch-Installer-NG
 
-##########
-# Arch Linux Install Script
-# Author: Stuart Kirker ( Stu )
-# Version: v1.9, 30-08-2020
-# Source: Personal Use
-##########
 
+Arch Linux Install Script
+Author: Stuart Kirker ( Stu )
+Version: v1.9, 30-08-2020
+Source: Personal Use
 
 
 ## Description
